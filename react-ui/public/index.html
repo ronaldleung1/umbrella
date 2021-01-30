@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,7 +21,7 @@
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
-
+ 
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
@@ -30,14 +32,59 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+      Thi-->
+      
+       
+  <script>
+    //Usage:  sendPostIt("hello", "a color", x, y, booleanIsAnImage, imageValue);
+    //Usage: getValues(); console.log(returnThis);
+    let returnThis = [];
+ 
+    getValues();
+    console.log(returnThis);
+  
+       function sendPostIt(value, color, x, y, isImage, imageValue){
+      if(isImage){
+        $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, data=>{})}
+ 
+      else{
+        $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, data=>{})
+      }
+      }
+      function getValues(){
+        
+        
+        $.getJSON("http://localhost:5000/postit.json", data=>{
+          //not hacky code shut up
+          let i = 0;
+          let index = 0;
+          let addThis = {};
+          for(key in data){
+            
+            if(i==0){  
+              if(data[key].imageValue==null){
+              addThis.value = data[key].value;
+            console.log(data[key].value);
+          i++; }else{
+           if(data[key].imageValue!=0)
+           addThis.image = data[key].imageValue;
+            returnThis[index] = addThis;
+          }
+        }else if(i==1){
+          addThis.color =data[key].color;            console.log(data[key].color);
+          i++;  
+        }else if(i==2){
+          addThis.x = data[key].x;            console.log(data[key].x);
+          i++; 
+        }else if(i==3){
+          addThis.y =data[key].y;            console.log(data[key].y);
+         
+          i=0; index++;
+        }
+          }
+        })
+      }
+ 
+  </script>
+    </body>
 </html>

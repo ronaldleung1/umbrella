@@ -3,9 +3,11 @@ const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const firebase = require("firebase");
+const cors = require('cors');
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
 let a = "default";
+ 
 var firebaseConfig = {
   apiKey: "AIzaSyCpmpvJf97k5ErAIGXsdWj179NI9SE-NSU",
   authDomain: "hackmcst-cd4ad.firebaseapp.com",
@@ -25,44 +27,52 @@ if (!firebase.apps.length) {
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
   console.error(`Node cluster master ${process.pid} is running`);
-
+ 
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
-
+ 
   cluster.on('exit', (worker, code, signal) => {
     console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
   });
-
+ 
 } else {
   const app = express();
-
+ app.use(cors());
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-
+ 
   // Answer API requests.
-  app.get("/postit.json", (req, res)=>{
-    a = firebase.database().ref("/")
-    a.on("value", data=>{
-      res.json(data);
-    })    
-  })
-  app.get("/postPostIt", (req, res)=>{
-    
+  
+ app.get('/postit.json', cors(), function (req, res, next) {
+ console.log("hi");
+ let supered
+ firebase.database().ref("/").on("value", value=>{
+ 
+  supered = value;
+ })
+  res.json(supered)
+})
+    app.get("/postPostIt", cors(), (req, res)=>{
+ 
+    res.end();
     firebase.database().ref("/").push({value: req.query.value});
-
+    firebase.database().ref("/").push({color: req.query.color});
+    firebase.database().ref("/").push({x: req.query.x});
+    firebase.database().ref("/").push({y: req.query.y});
+      console.log("success");
   })
   app.get('/api', function (req, res) {
     res.set('Content-Type', 'application/json');
     res.send('{"message":"Hello from the custom server!"}');
   });
-
+ 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function(request, response) {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
   });
-
+ 
   app.listen(PORT, function () {
     console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${PORT}`);
   });
