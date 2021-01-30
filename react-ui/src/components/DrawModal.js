@@ -34,7 +34,7 @@ export default function DrawModal(props) {
 
   return (
     <>
-      <Button onClick={onOpen}>Draw a Note</Button>
+      <Button ml={2} onClick={onOpen}>Draw a Note</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

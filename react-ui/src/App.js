@@ -163,13 +163,15 @@ class App extends React.Component {
             <ColorModeSwitcher justifySelf="flex-end" />
             <VStack spacing={8}>
               <StickyGrid stickies={this.state.stickies} /> {/*handleSubmit={drawing => this.updateDrawing(drawing)}*/}
-              <form onSubmit={this.handleSubmit}>
+              <Box position="absolute" bottom="10">
+              <form onSubmit={this.handleSubmit} style={{display: 'inline-block'}}>
                 <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
               </form>
               <DrawModal
                 handleSubmit={(drawing) => this.updateDrawing(drawing)}
               />
-              { process.env.NODE_ENV === 'production' ?
+              </Box>
+              {/*{ process.env.NODE_ENV === 'production' ?
                   <Text>
                     This is a production build from create-react-app.
                   </Text>
@@ -190,7 +192,7 @@ class App extends React.Component {
                 rel="noopener noreferrer"
               >
                 Learn Chakra
-              </Link>
+              </Link>*/}
             </VStack>
           </Grid>
         </Box>
