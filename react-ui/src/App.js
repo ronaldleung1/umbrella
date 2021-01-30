@@ -116,12 +116,6 @@ class App extends React.Component {
               <Box boxSize="sm">
                 <Image src={this.state.drawingUrl}/>
               </Box>
-              <CanvasDraw
-                disabled
-                hideGrid
-                ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
-                loadTimeOffset={0}
-                saveData={localStorage.getItem("savedDrawing")}/>
               { process.env.NODE_ENV === 'production' ?
                   <Text>
                     This is a production build from create-react-app.
