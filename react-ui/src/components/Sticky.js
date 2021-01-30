@@ -6,11 +6,11 @@ export default class Sticky extends React.Component {
     return (
       <>
       <SimpleGrid columns={2} spacing={10}>
-        <Box bg="tomato" height="80px"></Box>
-        <Box bg="tomato" height="80px"></Box>
-        <Box bg="tomato" height="80px"></Box>
-        <Box bg="tomato" height="80px"></Box>
-        <Box bg="tomato" height="80px"></Box>
+        <Box bg="tomato" height="80px">Test</Box>
+        <Box bg="tomato" height="80px">it</Box>
+        <Box bg="tomato" height="80px">will</Box>
+        <Box bg="tomato" height="80px">it</Box>
+        <Box bg="tomato" height="80px">work</Box>
       </SimpleGrid>
       {/*<Box p="5" maxW="320px" borderWidth="1px">
         <Image borderRadius="md" src="https://bit.ly/2k1H1t6" />
