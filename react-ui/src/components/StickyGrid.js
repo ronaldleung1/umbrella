@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Box, Image, Flex, Badge, Text, SimpleGrid } from "@chakra-ui/react";
+import Draggable from 'react-draggable';
 
 export default class StickyGrid extends React.Component {
   constructor(props) {
@@ -13,16 +14,20 @@ export default class StickyGrid extends React.Component {
     return (
       <>
       <SimpleGrid columns={4} spacing={2}>
-        {this.props.stickies.map((sticky, index) => {
+        {this.props.stickies.length !== 0 ? 
+          (this.props.stickies.map((sticky, index) => {
           //const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
           return (sticky.isImage ? 
-            (<Box className={"note "+sticky.color} key={index} width="120px" height="120px">
+            (<Draggable><Box className={"note "+sticky.color} key={index} width="120px" height="120px">
               <Image src={sticky.message}/>
-            </Box>)
+            </Box></Draggable>)
             :
-            <Box className={"note "+sticky.color} key={index} width="120px" height="120px">{sticky.message}</Box>
+            <Draggable><Box className={"note "+sticky.color} key={index} p={4} width="120px" height="120px">{sticky.message}</Box></Draggable>
           );
-        })}
+        }))
+        : 
+          <Text>Start adding sticky notes by clicking the button below!</Text>
+        }
         {/*Array(this.state.stickies).fill(<Box className="note purple" width="80px" height="80px"></Box>)
         <Box className="note purple" width="160px" height="80px"></Box>
         <Box className="note yellow" width="80px" height="80px"></Box>
