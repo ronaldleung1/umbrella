@@ -1,11 +1,18 @@
 import * as React from "react";
 import { Box, Image, Flex, Badge, Text, SimpleGrid } from "@chakra-ui/react";
 
-export default class Sticky extends React.Component {
+export default class StickyGrid extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stickies: 20
+    }
+  }
   render() {
     return (
       <>
-      <SimpleGrid columns={2} spacing={2}>
+      <SimpleGrid columns={4} spacing={2}>
+        {Array(this.state.stickies).fill(<Box className="note purple" width="80px" height="80px"></Box>)}
         <Box className="note purple" width="80px" height="80px"></Box>
         <Box className="note yellow" width="80px" height="80px"></Box>
         <Box className="note orange" width="80px" height="80px"></Box>
