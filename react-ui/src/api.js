@@ -1,8 +1,9 @@
 import $ from 'jquery';
 
+/*getValues().then(() => */
+console.log(getValues());
 let returnThis = [];
  
-getValues();
 console.log(returnThis);
 
    function sendPostIt(value, color, x, y, isImage, imageValue){
@@ -13,15 +14,18 @@ console.log(returnThis);
     $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, data=>{})
   }
   }
-  function getValues(){
+  async function getValues(){
     
     
     $.getJSON("http://localhost:5000/postit.json", data=>{
       //not hacky code shut up
-      let i = 0;
+      /*let i = 0;
       let index = 0;
       let addThis = {};
-      console.log(data);
+      returnThis = data;*/
+      console.log(returnThis);
+      return data;
+      //console.log(data);
       /*for(key of data){
         
         if(i==0){  
