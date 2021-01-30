@@ -14,7 +14,8 @@
     "react-ui/node_modules"
   ],
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "firebase": "^8.2.5"
   },
   "repository": {
     "type": "git",
