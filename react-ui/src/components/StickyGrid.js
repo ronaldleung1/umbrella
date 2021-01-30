@@ -12,6 +12,7 @@ export default class StickyGrid extends React.Component {
     return (
       <>
       <SimpleGrid columns={4} spacing={2}>
+        {this.props.stickies.map((message) => <Box className="note purple" width="80px" height="80px">{message}</Box>)}
         {Array(this.state.stickies).fill(<Box className="note purple" width="80px" height="80px"></Box>)}
         <Box className="note purple" width="80px" height="80px"></Box>
         <Box className="note yellow" width="80px" height="80px"></Box>

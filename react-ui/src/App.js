@@ -22,11 +22,13 @@ class App extends React.Component {
       message: null,
       isFetching: null,
       url: '/api',
-      stickyMessage: 'ledefault'
+      value: '',
+      stickies: []
     }
     this.fetchData = this.fetchData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.addSticky = this.addSticky.bind(this);
   }
   /*const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -62,11 +64,19 @@ class App extends React.Component {
     // https://reactjs.org/docs/integrating-with-other-libraries.html
   }
 
+  addSticky = value => {
+    this.setState(state => {
+      const stickies = state.stickies.concat(this.state.value);
+      console.log(stickies);
+      return {stickies};
+    });
+  }
   handleChange(e) {
-    this.setState({stickyMessage: e.target.value});
+    this.setState({value: e.target.value});
   }
   handleSubmit(e) {
-    alert(this.state.stickyMessage);
+    this.addSticky();
+    this.setState({value: ''});
     /*this.setState((message) => { 
       let stickyMessage = e.target.value;
       alert(stickyMessage);
@@ -83,7 +93,7 @@ class App extends React.Component {
           <Grid minH="100vh" p={3}>
             <ColorModeSwitcher justifySelf="flex-end" />
             <VStack spacing={8}>
-              <StickyGrid />
+              <StickyGrid stickies={this.state.stickies}/>
               <form onSubmit={this.handleSubmit}>
                 <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
               </form>
