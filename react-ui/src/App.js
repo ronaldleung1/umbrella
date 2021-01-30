@@ -15,8 +15,9 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import './App.css';
 import StickyGrid from './components/StickyGrid';
+import $ from 'jquery';
 import DrawModal from './components/DrawModal';
-import './api.js';
+//import sendPostIt from './api.js';
 import CanvasDraw from "react-canvas-draw";
 
 class App extends React.Component {
@@ -35,6 +36,8 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addSticky = this.addSticky.bind(this);
+    this.sendPostIt = this.sendPostIt.bind(this);
+    this.fetchPostIt = this.sendPostIt.bind(this);
   }
   /*const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -74,6 +77,9 @@ class App extends React.Component {
     this.setState(state => {
       const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
       const stickies = state.stickies.concat({isImage: isImage, message: value, color: randColor});
+      /*value, color, x, y, isImage, imageValue*/
+      this.sendPostIt("yeet", "yellow", 0, 0, true, 0);
+      this.fetchPostIt();
       console.log(stickies);
       return {stickies};
     });
@@ -97,6 +103,20 @@ class App extends React.Component {
     console.log(drawing);
     this.setState({drawingUrl: drawing});
     this.addSticky(drawing, true);
+  }
+  
+  sendPostIt(value, color, x, y, isImage, imageValue){
+    if(isImage){
+      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, data=>{})}
+  
+    else{
+      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, data=>{})
+    }
+  }
+  fetchPostIt(){
+    $.getJSON("http://localhost:5000/postit.json", data=>{
+      console.log(data);
+    })
   }
   
   render() {

@@ -51,3 +51,4 @@ console.log(returnThis);
       }*/
     })
   }
+export default { sendPostIt };
