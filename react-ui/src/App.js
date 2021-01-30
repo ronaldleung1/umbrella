@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
+import './App.css';
 import Sticky from './components/Sticky';
 
 function App() {

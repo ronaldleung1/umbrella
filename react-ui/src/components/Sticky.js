@@ -1,10 +1,18 @@
 import * as React from "react";
-import { Box, Image, Flex, Badge, Text } from "@chakra-ui/react";
+import { Box, Image, Flex, Badge, Text, SimpleGrid } from "@chakra-ui/react";
 
 export default class Sticky extends React.Component {
   render() {
     return (
-      <Box p="5" maxW="320px" borderWidth="1px">
+      <>
+      <SimpleGrid columns={2} spacing={10}>
+        <Box bg="tomato" height="80px"></Box>
+        <Box bg="tomato" height="80px"></Box>
+        <Box bg="tomato" height="80px"></Box>
+        <Box bg="tomato" height="80px"></Box>
+        <Box bg="tomato" height="80px"></Box>
+      </SimpleGrid>
+      {/*<Box p="5" maxW="320px" borderWidth="1px">
         <Image borderRadius="md" src="https://bit.ly/2k1H1t6" />
         <Flex align="baseline" mt={2}>
           <Badge colorScheme="pink">Plus</Badge>
@@ -27,7 +35,8 @@ export default class Sticky extends React.Component {
             <b>4.84</b> (190)
           </Text>
         </Flex>
-      </Box>
+      </Box>*/}
+      </>
     );
   }
 }
