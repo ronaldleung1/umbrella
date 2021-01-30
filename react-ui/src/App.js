@@ -7,6 +7,7 @@ import {
   VStack,
   Code,
   Grid,
+  Image,
   Input,
   theme,
 } from '@chakra-ui/react';
@@ -27,6 +28,7 @@ class App extends React.Component {
       value: '',
       stickies: [{message: "yellow", color: "yellow"}, {message: "purple", color: "purple"}],
       colors: ["purple", "yellow", "orange", "red", "blue"],
+      drawingUrl: ""
     }
     this.fetchData = this.fetchData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -92,6 +94,7 @@ class App extends React.Component {
 
   updateDrawing(drawing) {
     console.log(drawing);
+    this.setState({drawingUrl: drawing});
   }
   
   render() {
@@ -108,6 +111,9 @@ class App extends React.Component {
               <DrawModal
                 handleSubmit={(drawing) => this.updateDrawing(drawing)}
               />
+              <Box boxSize="sm">
+                <Image src={this.state.drawingUrl} alt="Segun Adebayo" />
+              </Box>
               <CanvasDraw
                 disabled
                 hideGrid
