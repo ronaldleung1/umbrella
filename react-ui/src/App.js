@@ -16,6 +16,7 @@ import { Logo } from './Logo';
 import './App.css';
 import StickyGrid from './components/StickyGrid';
 import DrawModal from './components/DrawModal';
+import './api.js';
 import CanvasDraw from "react-canvas-draw";
 
 class App extends React.Component {
