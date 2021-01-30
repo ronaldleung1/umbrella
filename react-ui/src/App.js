@@ -40,6 +40,11 @@ function App() {
     setIsFetching(true);
     fetchData();
   }, [fetchData]);
+
+  componentDidMount() {
+    // Will. put jquery stuff there
+    // https://reactjs.org/docs/integrating-with-other-libraries.html
+  }
   
   return (
     <ChakraProvider theme={theme}>
