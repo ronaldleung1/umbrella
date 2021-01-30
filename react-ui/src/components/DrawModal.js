@@ -11,10 +11,18 @@ import { Modal,
 } from "@chakra-ui/react";
 import CanvasDraw from "react-canvas-draw";
 
-export default function DrawModal() {
+export default function DrawModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [brushRadius, setBrushRadius]  = useState(10);
+  const [drawing, setDrawing] = useState();
   let saveableCanvas = useRef(null);
+
+  function handleSubmit(e) {
+    setDrawing(saveableCanvas.getSaveData());
+    props.handleSubmit(saveableCanvas.canvasContainer.children[1].toDataURL());
+    onClose();
+  }
+
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
@@ -26,16 +34,6 @@ export default function DrawModal() {
           <ModalCloseButton />
           <ModalBody>  
             <Stack direction="row" spacing={4} align="center">
-              <button
-                onClick={() => {
-                  localStorage.setItem(
-                    "savedDrawing",
-                    saveableCanvas.getSaveData()
-                  );
-                }}
-              >
-                Save
-              </button>
               <button
                 onClick={() => {
                   saveableCanvas.clear();
@@ -73,7 +71,18 @@ export default function DrawModal() {
             <Button variant="ghost" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Submit</Button>
+            <Button
+              colorScheme="blue"
+              onClick={handleSubmit}>
+              Submit
+            </Button>
+            {/*onClick={() => {
+                localStorage.setItem(
+                  "savedDrawing",
+                  saveableCanvas.getSaveData()
+                );
+                alert(saveableCanvas.getSaveData());
+              }} */}
           </ModalFooter>
         </ModalContent>
       </Modal>

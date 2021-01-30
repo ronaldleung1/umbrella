@@ -15,6 +15,7 @@ import { Logo } from './Logo';
 import './App.css';
 import StickyGrid from './components/StickyGrid';
 import DrawModal from './components/DrawModal';
+import CanvasDraw from "react-canvas-draw";
 
 class App extends React.Component {
   constructor(props) {
@@ -88,6 +89,10 @@ class App extends React.Component {
     //alert(this.state.stickyMessage);
     e.preventDefault();
   }
+
+  updateDrawing(drawing) {
+    console.log(drawing);
+  }
   
   render() {
     return (
@@ -96,11 +101,19 @@ class App extends React.Component {
           <Grid minH="100vh" p={3}>
             <ColorModeSwitcher justifySelf="flex-end" />
             <VStack spacing={8}>
-              <StickyGrid stickies={this.state.stickies}/>
+              <StickyGrid stickies={this.state.stickies} /> {/*handleSubmit={drawing => this.updateDrawing(drawing)}*/}
               <form onSubmit={this.handleSubmit}>
                 <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
               </form>
-              <DrawModal />
+              <DrawModal
+                handleSubmit={(drawing) => this.updateDrawing(drawing)}
+              />
+              <CanvasDraw
+                disabled
+                hideGrid
+                ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
+                loadTimeOffset={0}
+                saveData={localStorage.getItem("savedDrawing")}/>
               { process.env.NODE_ENV === 'production' ?
                   <Text>
                     This is a production build from create-react-app.
