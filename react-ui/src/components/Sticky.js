@@ -5,12 +5,12 @@ export default class Sticky extends React.Component {
   render() {
     return (
       <>
-      <SimpleGrid columns={2} spacing={10}>
-        <Box bg="tomato" height="80px">Test</Box>
-        <Box bg="tomato" height="80px">it</Box>
-        <Box bg="tomato" height="80px">will</Box>
-        <Box bg="tomato" height="80px">it</Box>
-        <Box bg="tomato" height="80px">work</Box>
+      <SimpleGrid columns={2} spacing={2}>
+        <Box bg="tomato" width="80px" height="80px">Test</Box>
+        <Box bg="tomato" width="80px" height="80px">Test</Box>
+        <Box bg="tomato" width="80px" height="80px">Test</Box>
+        <Box bg="tomato" width="80px" height="80px">Test</Box>
+        <Box bg="tomato" width="80px" height="80px">Test</Box>
       </SimpleGrid>
       {/*<Box p="5" maxW="320px" borderWidth="1px">
         <Image borderRadius="md" src="https://bit.ly/2k1H1t6" />
