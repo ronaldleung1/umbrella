@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useRef } from "react";
 import { Modal,
   ModalOverlay,
   ModalContent,
@@ -7,11 +7,14 @@ import { Modal,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  Box, Button, Image, Flex, Badge, Text, SimpleGrid 
+  Box, Button, Stack, Image, Flex, Badge, Text, SimpleGrid 
 } from "@chakra-ui/react";
+import CanvasDraw from "react-canvas-draw";
 
 export default function DrawTool() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [brushRadius, setBrushRadius]  = useState(10);
+  //const canvasDraw = useRef(saveableCanvas);
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
@@ -19,17 +22,56 @@ export default function DrawTool() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Create a New Drawing</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>Hello</Text>
+          {/*<Stack direction="row" spacing={4} align="center">
+              <button
+                onClick={() => {
+                  localStorage.setItem(
+                    "savedDrawing",
+                    this.saveableCanvas.getSaveData()
+                  );
+                }}
+              >
+                Save
+              </button>
+              <button
+                onClick={() => {
+                  this.saveableCanvas.clear();
+                }}
+              >
+                Clear
+              </button>
+              <button
+                onClick={() => {
+                  this.saveableCanvas.undo();
+                }}
+              >
+                Undo
+              </button>
+              <div>
+                <label>Brush-Radius:</label>
+                <input
+                  type="number"
+                  value={brushRadius}
+                  onChange={e =>
+                    setBrushRadius(parseInt(e.target.value, 10))
+                  }
+                />
+              </div>
+                </Stack>*/}
+            <CanvasDraw 
+              brushColor="#000"
+              brushRadius="5"
+              lazyRadius="3" />
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+            <Button variant="ghost" mr={3} onClick={onClose}>
+              Cancel
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button colorScheme="blue">Submit</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
