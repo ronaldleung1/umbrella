@@ -7,6 +7,7 @@ import {
   VStack,
   Code,
   Grid,
+  Input,
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -17,12 +18,15 @@ import StickyGrid from './components/StickyGrid';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.fetchData = this.fetchData.bind(this);
     this.state = {
       message: null,
       isFetching: null,
-      url: '/api'
+      url: '/api',
+      stickyMessage: 'ledefault'
     }
+    this.fetchData = this.fetchData.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   /*const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -57,6 +61,20 @@ class App extends React.Component {
     // Will. put jquery stuff there
     // https://reactjs.org/docs/integrating-with-other-libraries.html
   }
+
+  handleChange(e) {
+    this.setState({stickyMessage: e.target.value});
+  }
+  handleSubmit(e) {
+    alert(this.state.stickyMessage);
+    /*this.setState((message) => { 
+      let stickyMessage = e.target.value;
+      alert(stickyMessage);
+      return {stickyMessage}
+    });*/
+    //alert(this.state.stickyMessage);
+    e.preventDefault();
+  }
   
   render() {
     return (
@@ -66,6 +84,9 @@ class App extends React.Component {
             <ColorModeSwitcher justifySelf="flex-end" />
             <VStack spacing={8}>
               <StickyGrid />
+              <form onSubmit={this.handleSubmit}>
+                <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
+              </form>
               { process.env.NODE_ENV === 'production' ?
                   <Text>
                     This is a production build from create-react-app.
