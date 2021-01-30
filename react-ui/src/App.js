@@ -23,7 +23,8 @@ class App extends React.Component {
       isFetching: null,
       url: '/api',
       value: '',
-      stickies: []
+      stickies: [{message: "yellow", color: "yellow"}, {message: "purple", color: "purple"}],
+      colors: ["purple", "yellow", "orange", "red", "blue"],
     }
     this.fetchData = this.fetchData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,7 +67,8 @@ class App extends React.Component {
 
   addSticky = value => {
     this.setState(state => {
-      const stickies = state.stickies.concat(this.state.value);
+      const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
+      const stickies = state.stickies.concat({message: this.state.value, color: randColor});
       console.log(stickies);
       return {stickies};
     });

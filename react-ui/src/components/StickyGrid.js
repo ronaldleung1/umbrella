@@ -5,17 +5,17 @@ export default class StickyGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stickies: 20,
-      colors: ["purple", "yellow", "orange", "red", "blue"]
+      //stickies: [{message: "yellow", color: "yellow"}, {message: "purple", color: "purple"}],
+      //colors: ["purple", "yellow", "orange", "red", "blue"]
     }
   }
   render() {
     return (
       <>
       <SimpleGrid columns={4} spacing={2}>
-        {this.props.stickies.map((message, index) => {
-          const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
-          return <Box className={"note "+randColor} key={index} width="80px" height="80px">{message}</Box>;
+        {this.props.stickies.map((sticky, index) => {
+          //const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
+          return <Box className={"note "+sticky.color} key={index} width="80px" height="80px">{sticky.message}</Box>;
         })}
         {/*Array(this.state.stickies).fill(<Box className="note purple" width="80px" height="80px"></Box>)*/}
         <Box className="note purple" width="80px" height="80px"></Box>
