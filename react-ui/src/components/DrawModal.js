@@ -14,7 +14,7 @@ import CanvasDraw from "react-canvas-draw";
 export default function DrawModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [brushRadius, setBrushRadius]  = useState(10);
-  //const canvasDraw = useRef(saveableCanvas);
+  let saveableCanvas = useRef(null);
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
@@ -24,14 +24,13 @@ export default function DrawModal() {
         <ModalContent>
           <ModalHeader>Create a New Drawing</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-              
-          {/*<Stack direction="row" spacing={4} align="center">
+          <ModalBody>  
+            <Stack direction="row" spacing={4} align="center">
               <button
                 onClick={() => {
                   localStorage.setItem(
                     "savedDrawing",
-                    this.saveableCanvas.getSaveData()
+                    saveableCanvas.getSaveData()
                   );
                 }}
               >
@@ -39,14 +38,14 @@ export default function DrawModal() {
               </button>
               <button
                 onClick={() => {
-                  this.saveableCanvas.clear();
+                  saveableCanvas.clear();
                 }}
               >
                 Clear
               </button>
               <button
                 onClick={() => {
-                  this.saveableCanvas.undo();
+                  saveableCanvas.undo();
                 }}
               >
                 Undo
@@ -61,8 +60,10 @@ export default function DrawModal() {
                   }
                 />
               </div>
-                </Stack>*/}
+            </Stack>
             <CanvasDraw 
+              ref={canvasDraw => (saveableCanvas = canvasDraw)}
+              hideInterface
               brushColor="#000"
               brushRadius="5"
               lazyRadius="3" />
