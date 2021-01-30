@@ -14,7 +14,7 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import './App.css';
 import StickyGrid from './components/StickyGrid';
-import DrawTool from './components/DrawTool';
+import DrawModal from './components/DrawModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -100,7 +100,7 @@ class App extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
               </form>
-              <DrawTool />
+              <DrawModal />
               { process.env.NODE_ENV === 'production' ?
                   <Text>
                     This is a production build from create-react-app.

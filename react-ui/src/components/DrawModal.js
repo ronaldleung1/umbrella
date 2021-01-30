@@ -11,7 +11,7 @@ import { Modal,
 } from "@chakra-ui/react";
 import CanvasDraw from "react-canvas-draw";
 
-export default function DrawTool() {
+export default function DrawModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [brushRadius, setBrushRadius]  = useState(10);
   //const canvasDraw = useRef(saveableCanvas);
@@ -25,6 +25,7 @@ export default function DrawTool() {
           <ModalHeader>Create a New Drawing</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+              
           {/*<Stack direction="row" spacing={4} align="center">
               <button
                 onClick={() => {
