@@ -13,20 +13,24 @@ export default class StickyGrid extends React.Component {
   render() {
     return (
       <>
-      <SimpleGrid columns={4} spacing={2}>
+      
         {this.props.stickies.length !== 0 ? 
-          (this.props.stickies.map((sticky, index) => {
-          //const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
-          return (sticky.isImage ? 
-            (<Draggable><Box className={"note "+sticky.color} key={index} width="120px" height="120px">
-              <Image src={sticky.message}/>
-            </Box></Draggable>)
-            :
-            <Draggable><Box className={"note "+sticky.color} key={index} p={4} width="120px" height="120px">{sticky.message}</Box></Draggable>
-          );
-        }))
-        : 
+          (<SimpleGrid columns={4} spacing={2}>
+            {this.props.stickies.map((sticky, index) => {
+              //const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
+              return (sticky.isImage ? 
+                (<Draggable><Box className={"note "+sticky.color} key={index} width="120px" height="120px">
+                  <Image src={sticky.message}/>
+                </Box></Draggable>
+                ) : (
+                  <Draggable><Box className={"note "+sticky.color} key={index} p={4} width="120px" height="120px">{sticky.message}</Box></Draggable>
+                )
+              );
+            })}
+            </SimpleGrid>
+          ) : ( 
           <Text>Start adding sticky notes by clicking the button below!</Text>
+          )
         }
         {/*Array(this.state.stickies).fill(<Box className="note purple" width="80px" height="80px"></Box>)
         <Box className="note purple" width="160px" height="80px"></Box>
@@ -34,7 +38,7 @@ export default class StickyGrid extends React.Component {
         <Box className="note orange" width="80px" height="80px"></Box>
         <Box className="note blue" width="80px" height="80px"></Box>
         <Box className="note red" width="80px" height="80px"></Box>*/}
-      </SimpleGrid>
+      
       {/*<Box p="5" maxW="320px" borderWidth="1px">
         <Image borderRadius="md" src="https://bit.ly/2k1H1t6" />
         <Flex align="baseline" mt={2}>

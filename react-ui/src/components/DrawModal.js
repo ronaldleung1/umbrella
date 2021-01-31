@@ -25,6 +25,7 @@ export default function DrawModal(props) {
     onClose();
     toast({
       title: "Drawing submitted!",
+      position: "top-right",
       description: "You've shared your voice - go see your sticky note on display!",
       status: "success",
       duration: 9000,
