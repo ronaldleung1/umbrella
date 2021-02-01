@@ -29,7 +29,6 @@ class App extends React.Component {
       colors: ["purple", "yellow", "orange", "red", "blue"],
       drawingUrl: "",
     }
-    this.fetchData = this.fetchData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addSticky = this.addSticky.bind(this);
