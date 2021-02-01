@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Image, Flex, Badge, Text, SimpleGrid } from "@chakra-ui/react";
+import { Box, Image, Text, SimpleGrid } from "@chakra-ui/react";
 import Draggable from 'react-draggable';
 
 export default class StickyGrid extends React.Component {

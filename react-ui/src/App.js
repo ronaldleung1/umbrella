@@ -1,24 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {  } from 'react';
 import {
   ChakraProvider,
   Box,
-  Text,
-  Link,
   VStack,
-  Code,
   Grid,
-  Image,
   Input,
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
 import './App.css';
 import StickyGrid from './components/StickyGrid';
 import $ from 'jquery';
 import DrawModal from './components/DrawModal';
 //import sendPostIt from './api.js';
-import CanvasDraw from "react-canvas-draw";
 
 let finalArray = [];
 class App extends React.Component {
@@ -109,10 +103,10 @@ class App extends React.Component {
   
   sendPostIt(value, color, x, y, isImage, imageValue){
     if(isImage){
-      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, data=>{})}
+      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, ()=>{})}
   
     else{
-      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, data=>{})
+      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, ()=>{})
     }
   }
   fetchPostIt(){

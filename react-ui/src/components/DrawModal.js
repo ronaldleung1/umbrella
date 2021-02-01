@@ -8,18 +8,17 @@ import { Modal,
   ModalCloseButton,
   useDisclosure,
   useToast,
-  Box, Button, Stack, Image, Flex, Badge, Text, SimpleGrid 
-} from "@chakra-ui/react";
+  Button, Stack} from "@chakra-ui/react";
 import CanvasDraw from "react-canvas-draw";
 
 export default function DrawModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const [brushRadius, setBrushRadius]  = useState(10);
-  const [drawing, setDrawing] = useState();
+  const [, setDrawing] = useState();
   let saveableCanvas = useRef(null);
 
-  function handleSubmit(e) {
+  function handleSubmit() {
     setDrawing(saveableCanvas.getSaveData());
     props.handleSubmit(saveableCanvas.canvasContainer.children[1].toDataURL());
     onClose();
