@@ -19,11 +19,13 @@ export default class StickyGrid extends React.Component {
             {this.props.stickies.map((sticky, index) => {
               //const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
               return (sticky.isImage ? 
-                (<Draggable><Box className={"note "+sticky.color} key={index} width="120px" height="120px">
+                (<Draggable key={index}><Box className={"note "+sticky.color} width="120px" height="120px">
                   <Image src={sticky.message}/>
                 </Box></Draggable>
                 ) : (
-                  <Draggable><Box className={"note "+sticky.color} key={index} p={4} width="120px" height="120px">{sticky.message}</Box></Draggable>
+                  <Draggable key={index}><Box className={"note "+sticky.color} p={4} width="120px" height="120px">
+                    <Text>{sticky.message}</Text>
+                  </Box></Draggable>
                 )
               );
             })}
