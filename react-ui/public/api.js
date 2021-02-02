@@ -1,4 +1,4 @@
-import $ from 'jquery';
+/*import $ from 'jquery';
 
 let returnThis = [];
  
@@ -23,7 +23,7 @@ console.log(returnThis);
       let addThis = {};
       for(key of data){
         
-        if(i==0){  
+        if(i===0){  
           if(data[key].imageValue==null){
           addThis.value = data[key].value;
         console.log(data[key].value);
@@ -32,13 +32,13 @@ console.log(returnThis);
        addThis.image = data[key].imageValue;
         returnThis[index] = addThis;
       }
-    }else if(i==1){
+    }else if(i===1){
       addThis.color =data[key].color;            console.log(data[key].color);
       i++;  
-    }else if(i==2){
+    }else if(i===2){
       addThis.x = data[key].x;            console.log(data[key].x);
       i++; 
-    }else if(i==3){
+    }else if(i===3){
       addThis.y =data[key].y;            console.log(data[key].y);
      
       i=0; index++;
@@ -46,3 +46,4 @@ console.log(returnThis);
       }
     })
   }
+*/

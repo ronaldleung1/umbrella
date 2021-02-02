@@ -1,6 +1,6 @@
 {
-  "name": "heroku-cra-node",
-  "description": "web app made of create-react-app UI + Node API",
+  "name": "umbrella",
+  "description": "a platform for social activists to create post-it note murals",
   "scripts": {
   },
   "env": {

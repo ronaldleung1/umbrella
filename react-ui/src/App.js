@@ -21,6 +21,7 @@ class App extends React.Component {
     this.state = {
       message: null,
       isFetching: null,
+      data: null,
       url: '/api',
       value: '',
       stickies: [],
@@ -64,6 +65,7 @@ class App extends React.Component {
   componentDidMount() {
     this.setState({isFetching: true});
     this.fetchData();
+    this.fetchPostIt();
     // Will. put jquery stuff there
     // https://reactjs.org/docs/integrating-with-other-libraries.html
   }
@@ -75,8 +77,6 @@ class App extends React.Component {
       /*value, color, x, y, isImage, imageValue*/
       this.sendPostIt(isImage ? "" : value, randColor, 0, 0, !isImage, isImage ? value : 0);
       this.fetchPostIt(); //.then(()=>{console.log(finalArray)});
-      console.log(finalArray);
-      console.log(stickies);
       return {stickies};
     });
   }
@@ -102,15 +102,44 @@ class App extends React.Component {
   }
   
   sendPostIt(value, color, x, y, isImage, imageValue){
+    /*
+    var request = new XMLHttpRequest();
+    request.open('GET', '/my/url', true);
+
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        // Success!
+        var data = JSON.parse(request.responseText);
+      } else {
+        // We reached our target server, but it returned an error
+
+      }
+    };
+
+    request.onerror = function() {
+      // There was a connection error of some sort
+    };
+
+    request.send();
+    */
     if(isImage){
-      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, ()=>{})}
-  
-    else{
+      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, ()=>{})
+      /*
+      // change parameters to just "sticky"
+      $.getJSON("http://localhost:5000/postpostit?isImage=" + sticky.isImage + "&message=" + sticky.message + "&color=" + sticky.color + "&x=" + 0 + "&y=" + 0, ()=>{})
+      */
+    } else {
       $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, ()=>{})
     }
   }
   fetchPostIt(){
-    $.getJSON("http://localhost:5000/postit.json", data=>{
+    fetch(`http://localhost:5000/postit.json`)
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        this.setState({ data: json });
+      });
+    /*$.getJSON("http://localhost:5000/postit.json", data=>{
       //not hacky code shut up
       let i = 0;
  
@@ -146,7 +175,7 @@ class App extends React.Component {
           iterator = 0;
         }
       }
-    })
+    })*/
   }
   
   render() {

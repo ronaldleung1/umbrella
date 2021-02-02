@@ -72,8 +72,8 @@ export default function DrawModal(props) {
               ref={canvasDraw => (saveableCanvas = canvasDraw)}
               hideInterface
               brushColor="#000"
-              brushRadius="5"
-              lazyRadius="3" />
+              brushRadius={5}
+              lazyRadius={3} />
           </ModalBody>
 
           <ModalFooter>
