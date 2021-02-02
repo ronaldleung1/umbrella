@@ -9,7 +9,13 @@ import { Modal,
   useDisclosure,
   useToast,
   Button,
+  Text,
   Stack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import CanvasDraw from "react-canvas-draw";
 
@@ -44,31 +50,44 @@ export default function DrawModal(props) {
           <ModalHeader>Create a New Drawing</ModalHeader>
           <ModalCloseButton />
           <ModalBody>  
-            <Stack direction="row" spacing={4} align="center">
-              <Button size="xs"
-                onClick={() => {
-                  saveableCanvas.clear();
-                }}
+            <Stack direction="row" align="center" mb={2}>
+              <Button
+                size="xs"
+                mr={2}
+                onClick={() => {saveableCanvas.clear()}}
               >
                 Clear
               </Button>
-              <Button size="xs"
-                onClick={() => {
-                  saveableCanvas.undo();
-                }}
+              <Button
+                size="xs"
+                mr={2}
+                onClick={() => {saveableCanvas.undo()}}
               >
                 Undo
               </Button>
-              <div>
-                <label>Brush-Radius:</label>
-                <input
-                  type="number"
-                  value={brushRadius}
-                  onChange={e =>
-                    setBrushRadius(parseInt(e.target.value, 10))
-                  }
-                />
-              </div>
+              <Text fontSize="xs">Brush Size:</Text>
+              <NumberInput 
+                defaultValue={2}
+                min={1}
+                max={10}
+                allowMouseWheel
+                value={brushRadius}
+                onChange={value => setBrushRadius(parseInt(value, 10))}
+                size="xs"
+                maxW={16}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              {/*<Input
+                type="number"
+                value={brushRadius}
+                onChange={e => setBrushRadius(parseInt(e.target.value, 10))}
+                size="xs"
+              />*/}
             </Stack>
             <CanvasDraw 
               ref={canvasDraw => (saveableCanvas = canvasDraw)}
