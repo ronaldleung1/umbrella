@@ -8,13 +8,15 @@ import { Modal,
   ModalCloseButton,
   useDisclosure,
   useToast,
-  Button, Stack} from "@chakra-ui/react";
+  Button,
+  Stack,
+} from "@chakra-ui/react";
 import CanvasDraw from "react-canvas-draw";
 
 export default function DrawModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const [brushRadius, setBrushRadius]  = useState(10);
+  const [brushRadius, setBrushRadius]  = useState(5);
   const [, setDrawing] = useState();
   let saveableCanvas = useRef(null);
 
@@ -43,20 +45,20 @@ export default function DrawModal(props) {
           <ModalCloseButton />
           <ModalBody>  
             <Stack direction="row" spacing={4} align="center">
-              <button
+              <Button size="xs"
                 onClick={() => {
                   saveableCanvas.clear();
                 }}
               >
                 Clear
-              </button>
-              <button
+              </Button>
+              <Button size="xs"
                 onClick={() => {
                   saveableCanvas.undo();
                 }}
               >
                 Undo
-              </button>
+              </Button>
               <div>
                 <label>Brush-Radius:</label>
                 <input
@@ -72,7 +74,7 @@ export default function DrawModal(props) {
               ref={canvasDraw => (saveableCanvas = canvasDraw)}
               hideInterface
               brushColor="#000"
-              brushRadius={5}
+              brushRadius={brushRadius}
               lazyRadius={3} />
           </ModalBody>
 
