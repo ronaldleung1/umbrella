@@ -1,4 +1,14 @@
-# Umbrella
+<p align="center">
+  <a href="https://github.com/googol88/umbrella/">
+    <img src="react-ui/public/logo2.png" alt="Umbrella Logo" width="160" height="160">
+  </a>
+
+  <h2 align="center">Umbrella</h2>
+
+  <p align="center">
+    Post-It Note Murals for Social Activists
+  </p>
+</p>
 
 * 📐 [Design Points](#user-content-design-points)
 * 🕺 [Demo](#user-content-demo)
