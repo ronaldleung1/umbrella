@@ -1,9 +1,9 @@
 <p align="center">
-  <a href="https://github.com/googol88/umbrella/">
+  <a href="https://useumbrella.now.sh/">
     <img src="react-ui/public/logo2.png" alt="Umbrella Logo" width="160" height="160">
   </a>
 
-  <h3 align="center">Umbrella</h2>
+  <h3 align="center"><a href="https://useumbrella.now.sh/">Umbrella</a></h2>
 
   <p align="center">
     Post-It Note Murals for Social Activists
@@ -11,12 +11,13 @@
 </p>
 
 ## About the Project
-Umbrella is a platform for social activists to spread messages in a Post-It note style virtual Lennon Wall, inspired by the anti-government protests in Hong Kong. 
+Umbrella is a platform for social activists to spread messages in a Post-It note style virtual Lennon Wall, inspired by the anti-government protests in Hong Kong. Features draggable sticky notes and options to create messages with text or drawings.
 
 ### The Stack
-- React app with Chakra UI
+- [React app](https://github.com/facebook/react) with [Chakra UI](https://github.com/chakra-ui/chakra-ui)
 - Node.js/Express server
-- Firebase Realtime Database
+- [Firebase Realtime Database](https://firebase.google.com/docs/database)
+- Statically deployed with [Vercel](https://vercel.com/)
 
 > 🚨 At the moment, there is no functional back-end due to issues integrating with Firebase DB. Use the `static` branch to run without the Node server.
 ## Setup
