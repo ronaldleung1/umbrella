@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 let a = "default";
  
 var firebaseConfig = {
-  apiKey: "AIzaSyCpmpvJf97k5ErAIGXsdWj179NI9SE-NSU",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "hackmcst-cd4ad.firebaseapp.com",
   databaseURL: "https://hackmcst-cd4ad-default-rtdb.firebaseio.com",
   projectId: "hackmcst-cd4ad",
