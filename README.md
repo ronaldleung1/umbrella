@@ -76,4 +76,4 @@ npm install package-name --save
 Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [`LICENSE`](/LICENSE) for more information.
