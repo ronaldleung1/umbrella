@@ -5,6 +5,7 @@ import {
   VStack,
   Grid,
   Input,
+  Text,
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -22,7 +23,7 @@ class App extends React.Component {
       message: null,
       isFetching: null,
       data: null,
-      url: '/api',
+      url: 'http://localhost:5000/postit.json',
       value: '',
       stickies: [],
       colors: ["purple", "yellow", "orange", "red", "blue"],
@@ -48,10 +49,12 @@ class App extends React.Component {
         return response.json();
       })
       .then(json => {
-        this.setState({message: json.message, fetching: false}); /*setMessage(json.message)*/
-        /*this.setIsFetching(false);*/
+        this.setState({message: json.message, isFetching: false}, () => console.log(this.state.message));
+        console.log("Should be good");
+        /*setMessage(json.message)
+        this.setIsFetching(false);*/
       }).catch(e => {
-        this.setState({message: `API call failed: ${e}`, fetching: false});
+        this.setState({message: `API call failed: ${e}`, isFetching: false});
         /*setMessage(`API call failed: ${e}`);
         setIsFetching(false);*/
       })
@@ -65,7 +68,8 @@ class App extends React.Component {
   componentDidMount() {
     this.setState({isFetching: true});
     this.fetchData();
-    this.fetchPostIt();
+    //this.fetchPostIt();
+    console.log("Hello?");
     // Will. put jquery stuff there
     // https://reactjs.org/docs/integrating-with-other-libraries.html
   }
@@ -133,12 +137,12 @@ class App extends React.Component {
     }
   }
   fetchPostIt(){
-    fetch(`http://localhost:5000/postit.json`)
+    /*fetch(`http://localhost:5000/postit.json`)
       .then(res => res.json())
       .then(json => {
         console.log(json);
         this.setState({ data: json });
-      });
+      });*/
     /*$.getJSON("http://localhost:5000/postit.json", data=>{
       //not hacky code shut up
       let i = 0;
@@ -186,13 +190,20 @@ class App extends React.Component {
             <ColorModeSwitcher justifySelf="flex-end" />
             <VStack spacing={8}>
               <StickyGrid stickies={this.state.stickies} /> {/*handleSubmit={drawing => this.updateDrawing(drawing)}*/}
+              <Box position="absolute" top="10">
+                <Text>{'« '}
+                  {this.state.isFetching
+                    ? 'Fetching message from API'
+                    : this.state.message}
+                {' »'}</Text>
+              </Box>
               <Box position="absolute" bottom="10">
-              <form onSubmit={this.handleSubmit} style={{display: 'inline-block'}}>
-                <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
-              </form>
-              <DrawModal
-                handleSubmit={(drawing) => this.updateDrawing(drawing)}
-              />
+                <form onSubmit={this.handleSubmit} style={{display: 'inline-block'}}>
+                  <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
+                </form>
+                <DrawModal
+                  handleSubmit={(drawing) => this.updateDrawing(drawing)}
+                />
               </Box>
               {/*{ process.env.NODE_ENV === 'production' ?
                   <Text>

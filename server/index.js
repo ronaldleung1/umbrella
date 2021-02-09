@@ -39,22 +39,21 @@ if (!isDev && cluster.isMaster) {
  
 } else {
   const app = express();
- app.use(cors());
+  app.use(cors());
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
  
   // Answer API requests.
   
- app.get('/postit.json', cors(), function (req, res, next) {
- console.log("hi");
- let supered
- firebase.database().ref("/").on("value", value=>{
- 
-  supered = value;
- })
-  res.json(supered)
-})
-    app.get("/postPostIt", cors(), (req, res)=>{
+  app.get('/postit.json', cors(), function (req, res, next) {
+    console.log("hi");
+    let supered;
+    firebase.database().ref("/").on("value", value=>{
+      supered = value;
+    })
+    res.json(supered)
+  })
+  app.get("/postPostIt", cors(), (req, res)=>{
  
     res.end();
     firebase.database().ref("/").push({value: req.query.value});
@@ -63,6 +62,7 @@ if (!isDev && cluster.isMaster) {
     firebase.database().ref("/").push({y: req.query.y});
       console.log("success");
   })
+
   app.get('/api', function (req, res) {
     res.set('Content-Type', 'application/json');
     res.send('{"message":"Hello from the custom server!"}');
