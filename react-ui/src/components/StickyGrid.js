@@ -23,8 +23,8 @@ export default class StickyGrid extends React.Component {
                   <Image src={sticky.message}/>
                 </Box></Draggable>
                 ) : (
-                  <Draggable key={index}><Box className={"note "+sticky.color} p={4} width="120px" height="120px">
-                    <Text>{sticky.message}</Text>
+                  <Draggable key={index}><Box className={"note "+sticky.color} d="flex" overflowY="scroll" justifyContent="center" wordBreak="break-word" p={4} width="120px" height="120px">
+                    <Text alignSelf="center">{sticky.message}</Text>
                   </Box></Draggable>
                 )
               );
