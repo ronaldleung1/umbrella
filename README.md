@@ -11,7 +11,7 @@
 </p>
 
 ## About the Project
-Umbrella is a platform for social activists to spread messages in a Post-It note style virtual Lennon Wall, inspired by the anti-government protests in Hong Kong. Features draggable sticky notes and options to create messages with text or drawings.
+Umbrella is a platform for social activists to spread messages in a Post-It note style virtual Lennon Wall. Features draggable sticky notes and options to create messages with text or drawings.
 
 ### The Stack
 - [React app](https://github.com/facebook/react) with [Chakra UI](https://github.com/chakra-ui/chakra-ui)
