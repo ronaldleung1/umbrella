@@ -62,11 +62,14 @@ if (!isDev && cluster.isMaster) {
   app.get("/postPostIt", cors(), (req, res)=>{
  
     res.end();
-    firebase.database().ref("/").push({value: req.query.value});
-    firebase.database().ref("/").push({color: req.query.color});
-    firebase.database().ref("/").push({x: req.query.x});
-    firebase.database().ref("/").push({y: req.query.y});
-      console.log("success");
+    let postit = {
+      value: req.query.value,
+      color: req.query.color,
+      x: req.query.x,
+      y: req.query.y,
+    }
+    firebase.database().ref("/").push(postit);
+    console.log(postit);
   })
 
   app.get('/api', function (req, res) {
