@@ -1,7 +1,7 @@
 {
-  "name": "heroku-cra-node",
+  "name": "umbrella-server",
   "version": "3.0.0",
-  "description": "How to use create-react-app with a custom Node API on Heroku",
+  "description": "Powering backend of Umbrella, a platform for social activists",
   "engines": {
     "node": "10.x"
   },
