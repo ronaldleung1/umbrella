@@ -34,7 +34,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.addSticky = this.addSticky.bind(this);
     this.sendPostIt = this.sendPostIt.bind(this);
-    this.fetchPostIt = this.sendPostIt.bind(this);
+    this.fetchPostIt = this.fetchPostIt.bind(this);
   }
   /*const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -49,26 +49,16 @@ class App extends React.Component {
         return response.json();
       })
       .then(json => {
-        this.setState({message: json.message, isFetching: false}, () => console.log(this.state.message));
-        console.log("Should be good");
-        /*setMessage(json.message)
-        this.setIsFetching(false);*/
+        this.setState({message: JSON.stringify(json), isFetching: false}, () => console.log(this.state.message));
+        console.log(JSON.stringify(json));
       }).catch(e => {
         this.setState({message: `API call failed: ${e}`, isFetching: false});
-        /*setMessage(`API call failed: ${e}`);
-        setIsFetching(false);*/
       })
   };
-
-  /*useEffect(() => {
-    setIsFetching(true);
-    fetchData();
-  }, [fetchData]);*/
 
   componentDidMount() {
     this.setState({isFetching: true});
     this.fetchData();
-    //this.fetchPostIt();
     console.log("Hello?");
     // Will. put jquery stuff there
     // https://reactjs.org/docs/integrating-with-other-libraries.html
@@ -80,7 +70,7 @@ class App extends React.Component {
       const stickies = state.stickies.concat({isImage: isImage, message: value, color: randColor});
       /*value, color, x, y, isImage, imageValue*/
       this.sendPostIt(isImage ? "" : value, randColor, 0, 0, !isImage, isImage ? value : 0);
-      this.fetchPostIt(); //.then(()=>{console.log(finalArray)});
+      //this.fetchData();
       return {stickies};
     });
   }
@@ -127,12 +117,14 @@ class App extends React.Component {
     request.send();
     */
     if(isImage){
+      console.log("request sent!");
       $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, ()=>{})
       /*
       // change parameters to just "sticky"
       $.getJSON("http://localhost:5000/postpostit?isImage=" + sticky.isImage + "&message=" + sticky.message + "&color=" + sticky.color + "&x=" + 0 + "&y=" + 0, ()=>{})
       */
     } else {
+      console.log("request sent why!");
       $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, ()=>{})
     }
   }

@@ -7,7 +7,8 @@
   },
   "scripts": {
     "start": "node server",
-    "build": "cd react-ui/ && npm install && npm run build"
+    "build": "cd react-ui/ && npm install && npm run build",
+    "nodemon": "nodemon server"
   },
   "cacheDirectories": [
     "node_modules",
@@ -16,7 +17,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "firebase": "^8.2.5"
+    "firebase": "^8.2.5",
+    "nodemon": "^2.0.7"
   },
   "repository": {
     "type": "git",
