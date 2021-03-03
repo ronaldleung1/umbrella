@@ -69,7 +69,7 @@ if (!isDev && cluster.isMaster) {
       x: req.query.x,
       y: req.query.y,
     }
-    firebase.database().ref("/postit").push(postit);
+    firebase.database().ref("/").push(postit);
     console.log(postit);
   })
 
