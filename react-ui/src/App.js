@@ -69,7 +69,7 @@ class App extends React.Component {
       const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
       const stickies = state.stickies.concat({isImage: isImage, message: value, color: randColor});
       /*value, color, x, y, isImage, imageValue*/
-      this.sendPostIt(isImage ? "" : value, randColor, 0, 0, !isImage, isImage ? value : 0);
+      this.sendPostIt(isImage, value, randColor, 0, 0);
       //this.fetchData();
       return {stickies};
     });
@@ -95,7 +95,7 @@ class App extends React.Component {
     this.addSticky(drawing, true);
   }
   
-  sendPostIt(value, color, x, y, isImage, imageValue){
+  sendPostIt(isImage, value, color, x, y){
     /*
     var request = new XMLHttpRequest();
     request.open('GET', '/my/url', true);
@@ -116,17 +116,7 @@ class App extends React.Component {
 
     request.send();
     */
-    if(isImage){
-      console.log("request sent!");
-      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y + "&imageValue="+imageValue, ()=>{})
-      /*
-      // change parameters to just "sticky"
-      $.getJSON("http://localhost:5000/postpostit?isImage=" + sticky.isImage + "&message=" + sticky.message + "&color=" + sticky.color + "&x=" + 0 + "&y=" + 0, ()=>{})
-      */
-    } else {
-      console.log("request sent why!");
-      $.getJSON("http://localhost:5000/postpostit?value=" + value + "&color=" + color + "&x=" + x + "&y=" +y, ()=>{})
-    }
+   $.getJSON("http://localhost:5000/postpostit?isImage=" + isImage + "&value=" + value + "&color=" + color + "&x=" + x + "&y=" + y, ()=>{})
   }
   fetchPostIt(){
     /*fetch(`http://localhost:5000/postit.json`)
@@ -182,13 +172,13 @@ class App extends React.Component {
             <ColorModeSwitcher justifySelf="flex-end" />
             <VStack spacing={8}>
               <StickyGrid stickies={this.state.stickies} /> {/*handleSubmit={drawing => this.updateDrawing(drawing)}*/}
-              <Box position="absolute" top="10">
+              {/*<Box position="absolute" top="10">
                 <Text>{'« '}
                   {this.state.isFetching
                     ? 'Fetching message from API'
                     : this.state.message}
                 {' »'}</Text>
-              </Box>
+              </Box>*/}
               <Box position="absolute" bottom="10">
                 <form onSubmit={this.handleSubmit} style={{display: 'inline-block'}}>
                   <Input placeholder="Enter message" value={this.state.value} onChange={this.handleChange}></Input>
@@ -197,28 +187,6 @@ class App extends React.Component {
                   handleSubmit={(drawing) => this.updateDrawing(drawing)}
                 />
               </Box>
-              {/*{ process.env.NODE_ENV === 'production' ?
-                  <Text>
-                    This is a production build from create-react-app.
-                  </Text>
-                : <Text>
-                    Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-                  </Text>
-              }
-              <Text>{'« '}
-              {this.state.isFetching
-                ? 'Fetching message from API'
-                : this.state.message}
-              {' »'}</Text>
-              <Link
-                color="teal.500"
-                href="https://chakra-ui.com"
-                fontSize="2xl"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn Chakra
-              </Link>*/}
             </VStack>
           </Grid>
         </Box>
@@ -228,74 +196,3 @@ class App extends React.Component {
 }
 
 export default App;
-/*
-import React, { useCallback, useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  const [message, setMessage] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/api');
-
-  const fetchData = useCallback(() => {
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`status ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(json => {
-        setMessage(json.message);
-        setIsFetching(false);
-      }).catch(e => {
-        setMessage(`API call failed: ${e}`);
-        setIsFetching(false);
-      })
-  }, [url]);
-
-  useEffect(() => {
-    setIsFetching(true);
-    fetchData();
-  }, [fetchData]);
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        { process.env.NODE_ENV === 'production' ?
-            <p>
-              This is a production build from create-react-app.
-            </p>
-          : <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-        }
-        <p>{'« '}<strong>
-          {isFetching
-            ? 'Fetching message from API'
-            : message}
-        </strong>{' »'}</p>
-        <p><a
-          className="App-link"
-          href="https://github.com/mars/heroku-cra-node"
-        >
-          React + Node deployment on Heroku
-        </a></p>
-        <p><a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a></p>
-      </header>
-    </div>
-  );
-
-}
-
-export default App;
-*/
