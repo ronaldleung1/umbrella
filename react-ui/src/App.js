@@ -49,10 +49,11 @@ class App extends React.Component {
         return response.json();
       })
       .then(json => {
-        this.setState({message: JSON.stringify(json), isFetching: false}, () => console.log(this.state.message));
-        console.log(JSON.stringify(json));
+        this.setState({message: Object.values({...json}), isFetching: false}, () => console.log(this.state.message));
+        console.log(this.state.message);
       }).catch(e => {
         this.setState({message: `API call failed: ${e}`, isFetching: false});
+        console.log(this.state.message);
       })
   };
 
