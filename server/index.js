@@ -63,7 +63,7 @@ if (!isDev && cluster.isMaster) {
  
     res.end();
     let postit = {
-      isImage: req.query.isImage,
+      isImage: req.query.isImage === "true",
       value: req.query.value,
       color: req.query.color,
       x: req.query.x,

@@ -49,8 +49,7 @@ class App extends React.Component {
         return response.json();
       })
       .then(json => {
-        this.setState({message: Object.values({...json}), isFetching: false}, () => console.log(this.state.message));
-        console.log(this.state.message);
+        this.setState({stickies: Object.values({...json}), message: '200 OK', isFetching: false}, () => console.log(this.state.stickies));
       }).catch(e => {
         this.setState({message: `API call failed: ${e}`, isFetching: false});
         console.log(this.state.message);
@@ -68,7 +67,7 @@ class App extends React.Component {
   addSticky = (value, isImage) => {
     this.setState(state => {
       const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
-      const stickies = state.stickies.concat({isImage: isImage, message: value, color: randColor});
+      const stickies = state.stickies.concat({isImage: isImage, value: value, color: randColor});
       /*value, color, x, y, isImage, imageValue*/
       this.sendPostIt(isImage, value, randColor, 0, 0);
       //this.fetchData();
