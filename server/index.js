@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
 let a = "default";
  
-var firebaseConfig = {
+let firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "use-umbrella.firebaseapp.com",
   databaseURL: "https://use-umbrella-default-rtdb.firebaseio.com/",
@@ -63,13 +63,13 @@ if (!isDev && cluster.isMaster) {
  
     res.end();
     let postit = {
-      isImage: req.query.isImage,
-      value: req.query.value,
+      isImage: req.query.isImage === "true",
+      value: decodeURI(req.query.value),
       color: req.query.color,
       x: req.query.x,
       y: req.query.y,
     }
-    firebase.database().ref("/postit").push(postit);
+    firebase.database().ref("/").push(postit);
     console.log(postit);
   })
 
