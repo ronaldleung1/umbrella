@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
 let a = "default";
  
-var firebaseConfig = {
+let firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "use-umbrella.firebaseapp.com",
   databaseURL: "https://use-umbrella-default-rtdb.firebaseio.com/",
