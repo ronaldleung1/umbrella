@@ -5,7 +5,6 @@ import {
   VStack,
   Grid,
   Input,
-  Text,
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -15,7 +14,6 @@ import $ from 'jquery';
 import DrawModal from './components/DrawModal';
 //import sendPostIt from './api.js';
 
-let finalArray = [];
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -116,7 +114,7 @@ class App extends React.Component {
 
     request.send();
     */
-   $.getJSON("http://localhost:5000/postpostit?isImage=" + isImage + "&value=" + value + "&color=" + color + "&x=" + x + "&y=" + y, ()=>{})
+   $.getJSON("http://localhost:5000/postpostit?isImage=" + isImage + "&value=" + encodeURI(value) + "&color=" + color + "&x=" + x + "&y=" + y, ()=>{})
   }
   fetchPostIt(){
     /*fetch(`http://localhost:5000/postit.json`)

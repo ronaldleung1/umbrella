@@ -21,7 +21,6 @@ export default class StickyGrid extends React.Component {
               return (sticky.isImage ? (
                   <Draggable key={index}><Box className={"note "+sticky.color} width="120px" height="120px">
                     <Image src={sticky.value}/>
-                    <Text>{sticky.value}</Text>
                   </Box></Draggable>
                 ) : (
                   <Draggable key={index}><Box className={"note "+sticky.color} d="flex" overflowY="scroll" justifyContent="center" wordBreak="break-word" p={4} width="120px" height="120px">
