@@ -106,13 +106,6 @@ export default function DrawModal(props) {
               onClick={handleSubmit}>
               Submit
             </Button>
-            {/*onClick={() => {
-                localStorage.setItem(
-                  "savedDrawing",
-                  saveableCanvas.getSaveData()
-                );
-                alert(saveableCanvas.getSaveData());
-              }} */}
           </ModalFooter>
         </ModalContent>
       </Modal>

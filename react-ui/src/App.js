@@ -10,8 +10,10 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import './App.css';
 import StickyGrid from './components/StickyGrid';
-import $ from 'jquery';
 import DrawModal from './components/DrawModal';
+import $ from 'jquery';
+import firebase from './firebase.js';
+
 //import sendPostIt from './api.js';
 
 class App extends React.Component {
@@ -27,11 +29,10 @@ class App extends React.Component {
       colors: ["purple", "yellow", "orange", "red", "blue"],
       drawingUrl: "",
     }
-    this.fetchData = this.fetchData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addSticky = this.addSticky.bind(this);
-    this.sendPostIt = this.sendPostIt.bind(this);
+    this.sendPost = this.sendPost.bind(this);
     this.fetchPostIt = this.fetchPostIt.bind(this);
   }
   /*const [message, setMessage] = useState(null);
@@ -39,7 +40,10 @@ class App extends React.Component {
   const [url, setUrl] = useState('/api');*/
   
   fetchData() {
-    fetch(this.state.url)
+    firebase.database().ref("/").on("value", value=>{
+      this.setState({stickies: Object.values(value.val()), message: '200 OK', isFetching: false}, () => console.log(this.state.stickies));
+    });
+    /*fetch(this.state.url)
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
@@ -51,7 +55,7 @@ class App extends React.Component {
       }).catch(e => {
         this.setState({message: `API call failed: ${e}`, isFetching: false});
         console.log(this.state.message);
-      })
+      })*/
   };
 
   componentDidMount() {
@@ -67,7 +71,7 @@ class App extends React.Component {
       const randColor = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
       const stickies = state.stickies.concat({isImage: isImage, value: value, color: randColor});
       /*value, color, x, y, isImage, imageValue*/
-      this.sendPostIt(isImage, value, randColor, 0, 0);
+      this.sendPost(isImage, value, randColor, 0, 0);
       //this.fetchData();
       return {stickies};
     });
@@ -93,28 +97,17 @@ class App extends React.Component {
     this.addSticky(drawing, true);
   }
   
-  sendPostIt(isImage, value, color, x, y){
-    /*
-    var request = new XMLHttpRequest();
-    request.open('GET', '/my/url', true);
-
-    request.onload = function() {
-      if (request.status >= 200 && request.status < 400) {
-        // Success!
-        var data = JSON.parse(request.responseText);
-      } else {
-        // We reached our target server, but it returned an error
-
-      }
-    };
-
-    request.onerror = function() {
-      // There was a connection error of some sort
-    };
-
-    request.send();
-    */
-   $.getJSON("http://localhost:5000/postpostit?isImage=" + isImage + "&value=" + encodeURI(value) + "&color=" + color + "&x=" + x + "&y=" + y, ()=>{})
+  sendPost(isImage, value, color, x, y){
+    const postRef = firebase.database().ref("/");
+    const post = {
+      isImage,
+      value,
+      color,
+      x,
+      y,
+    }
+    postRef.push(post);
+   //$.getJSON("http://localhost:5000/postpostit?isImage=" + isImage + "&value=" + encodeURI(value) + "&color=" + color + "&x=" + x + "&y=" + y, ()=>{})
   }
   fetchPostIt(){
     /*fetch(`http://localhost:5000/postit.json`)
