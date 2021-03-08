@@ -40,7 +40,10 @@ class App extends React.Component {
   const [url, setUrl] = useState('/api');*/
   
   fetchData() {
-    fetch(this.state.url)
+    firebase.database().ref("/").on("value", value=>{
+      this.setState({stickies: Object.values(value.val()), message: '200 OK', isFetching: false}, () => console.log(this.state.stickies));
+    });
+    /*fetch(this.state.url)
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
@@ -52,7 +55,7 @@ class App extends React.Component {
       }).catch(e => {
         this.setState({message: `API call failed: ${e}`, isFetching: false});
         console.log(this.state.message);
-      })
+      })*/
   };
 
   componentDidMount() {
