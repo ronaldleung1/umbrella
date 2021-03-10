@@ -1,35 +1,44 @@
 {
-  "name": "umbrella-server",
-  "version": "3.0.0",
-  "description": "Powering backend of Umbrella, a platform for social activists",
-  "engines": {
-    "node": "10.x"
+  "name": "react-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^1.0.0",
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@testing-library/jest-dom": "^5.9.0",
+    "@testing-library/react": "^10.2.1",
+    "@testing-library/user-event": "^12.0.2",
+    "firebase": "^8.2.10",
+    "framer-motion": ">=3.0.0",
+    "jquery": "^3.5.1",
+    "react": "^17.0.1",
+    "react-canvas-draw": "^1.1.1",
+    "react-dom": "^17.0.1",
+    "react-draggable": "^4.4.3",
+    "react-icons": "^3.0.0",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.2"
   },
   "scripts": {
-    "start": "node server",
-    "build": "cd react-ui/ && npm install && npm run build",
-    "nodemon": "nodemon server"
+    "start": "react-scripts start",
+    "build": "CI=false react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "react-ui/node_modules"
-  ],
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "firebase": "^8.2.5",
-    "nodemon": "^2.0.7"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mars/heroku-cra-node.git"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "create-react-app",
-    "react"
-  ],
-  "license": "MIT",
-  "devDependencies": {}
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
