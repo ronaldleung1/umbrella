@@ -86,10 +86,17 @@ class App extends React.Component {
   render() {
     return (
       <ChakraProvider theme={theme}>
-        
+          <Box position="fixed">
+            <Image
+              boxSize="100px"
+              objectFit="cover"
+              src={process.env.PUBLIC_URL + "/logo.png"}
+              alt="Umbrella Logo"
+            />
+          </Box>
           <Grid minH="100vh" p={3}>
-            <ColorModeSwitcher justifySelf="flex-end" />
-            <VStack spacing={8}>
+            <ColorModeSwitcher position="fixed" top={0} right={0} m={3} /> {/*position="fixed" top={0} right={0} m={3}*/}
+            <VStack spacing={8} justifyContent="center">
               <StickyGrid stickies={this.state.stickies} />
               {/*<Box position="absolute" top="10">
                 <Text>{'« '}
